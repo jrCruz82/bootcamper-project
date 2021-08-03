@@ -2,8 +2,10 @@ package com.organization.mvcproject.model;
 
 import org.springframework.stereotype.Component;
 
+import com.organization.mvcproject.api.model.Game;
+
 @Component
-public class Game {
+public class GameImpl implements Game{
 
 	private Long id;
 	private String name;

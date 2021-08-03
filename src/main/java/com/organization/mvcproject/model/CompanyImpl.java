@@ -5,8 +5,10 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import com.organization.mvcproject.api.model.Company;
+import com.organization.mvcproject.api.model.Game;
 @Component
-public class Company {
+public class CompanyImpl implements Company{
 
 	private Long id;
 	private String name;
