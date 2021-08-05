@@ -54,7 +54,7 @@
                             <div class="form-group col-md-12">
                                 <label class="col-md-2 control-lable text-light" for="genre">Game Genre</label>
                                 <div class="col-md-7">
-                                    <input type="text" ng-model="ctrl.game.genre" id="genre" class="form-control input-sm" placeholder="Enter the genre of the new game" />
+                                    <input type="text" data-ng-model="ctrl.game.genre" id="genre" class="form-control input-sm" placeholder="Enter the genre of the new game" />
                                 </div>
                             </div>
                         </div>
@@ -73,12 +73,17 @@
             <div class="panel panel-default">
                 <!-- Default panel contents -->
                 <div class="panel-heading text-light"><span class="lead">List of all current games</span></div>
+                	<span data-ng-if="true"><span class="lead"> | </span>
+                	<label class="lead text-light" for="selectGenreFilter">Filter by Genre</label>
+                	<select id="selectGenreFilter" data-ng-options="genre as genre for genre in ctrl.genres" data-ng-model="ctrl.selectedGenre" data-ng-change="ctrl.fetchAllGames()" ></select></span>
                 <div class="tablecontainer">
                     <table class="table table-dark table-striped text-light">
                         <thead>
                             <tr>
                                 <th>Game Name</th>
                                 <th>Game Genre</th>
+                                <th>Game Update</th>
+                                <th>Game Delete</th>
                                 <th width="20%"></th>
                             </tr>
                         </thead>
@@ -86,8 +91,9 @@
                             <tr data-ng-repeat="currentGame in ctrl.games">
                                 <td><span data-ng-bind="currentGame.name"></span></td>
                                 <td><span data-ng-bind="currentGame.genre"></span></td>
-                                <td><button data-ng-click="ctrl.deleteGame(currentGame)" type="button" class="btn btn-primary">Delete</button></td>
-                                <td><button data-ng-click="ctrl.loadUpdateForm(currentGame)" type="submit" class="btn btn-secondary btn-sm">Select</button></td>
+                                <td><button data-ng-click="ctrl.loadUpdateForm(currentGame)" type="submit" class="btn btn-primary" >Select</button></td>
+                                <td><button data-ng-click="ctrl.deleteGame(currentGame)" type="button" class="btn btn-danger btn-sm">Delete</button></td>
+                                
                                 <td>
                                 </td>
                             </tr>

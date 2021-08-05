@@ -9,14 +9,49 @@ angular.module('GameApp').controller('GameController',
 				genre : ''
 			};
 			self.games = [];
-			
+			self.genres = [{name:'All'}];
+			self.selectedGenre = 'All';
 
 			self.fetchAllGames = function(){
-				GameService.fetchAllGames().then(function(data) {
-					self.games = data;
-				});
-			}
+					if(self.selectedGenre != 'All'){
+						console.log('not fetch all');
+						GameService.filterByGenre(self.selectedGenre).then(function(data){
+							self.games = data;
+						});
+					}else{
+						GameService.fetchAllGames().then(function(data) {
+						console.log('fetch all');
+						self.games = data;
+						if(self.games.length>0){
+							console.log('games >0');
+							self.genres = generateGenreList();
+							
+						}else {
+							self.genres = [{name:'All'}];
+							console.log(self.genres);
+						}
+						});
+					}
+				}
 
+			function generateGenreList(){
+				let genreArray = [];
+				self.games.forEach((game)=>{
+					genreArray.push(game.genre);
+				})
+				
+				const genreSet = new Set(genreArray);
+				genreArray = [];
+				genreArray.push('All');
+				
+				genreSet.forEach((genre)=>{
+					genreArray.push(genre);
+				})
+				
+				console.log(genreArray);
+				return genreArray;
+				
+			}
 			self.addGame = function(){
 				if(!self.game.id){
 					return GameService.createGame(self.game).then( function() {

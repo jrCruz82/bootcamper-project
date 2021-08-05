@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.organization.mvcproject.api.service.GameService;
 import com.organization.mvcproject.mockDAO.MockDAOImpl;
-import com.organization.mvcproject.model.GameImpl;
 import com.organization.mvcproject.api.model.Game;
 
 @Service("javaGameService")
@@ -36,6 +35,11 @@ public class GameServiceImpl implements GameService {
 	@Override
 	public Game updateGame(Game game) {
 		return mockDAO.updateGame(game);
+	}
+
+	@Override
+	public List<Game> fetchGameByGenre(String genre) {
+		return mockDAO.fetchGameByGenre(genre);
 	}
 	
 

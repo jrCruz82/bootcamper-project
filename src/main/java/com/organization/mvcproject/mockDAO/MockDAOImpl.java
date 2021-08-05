@@ -2,6 +2,8 @@ package com.organization.mvcproject.mockDAO;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Repository;
 
@@ -85,6 +87,12 @@ public class MockDAOImpl implements MockDao{
 			return true;
 		}
 		return false;
+	}
+
+
+	public List<Game> fetchGameByGenre(String genre) {
+		Predicate<Game> byGenre = game -> game.getGenre().equals(genre);
+		return games.stream().filter(byGenre).collect(Collectors.toList());
 	}
 
 
